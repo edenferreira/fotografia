@@ -19,11 +19,33 @@
 
     a {
       margin: 16px;
-      margin-left: 35%;
       color: black;
       text-decoration: none;
       background: white;
-      font-size: 3.5vw;
+    }
+
+    @media (orientation: landscape) {
+      body {
+        padding-top: 7vh;
+      }
+      
+      a {
+        font-size: 3.5vw;
+        margin-left: 35vw;
+        margin-bottom: 3vh;
+      }
+    }
+
+    @media (orientation: portrait) {
+      body {
+        padding-top: 17vh;
+      }
+
+      a {
+        margin-bottom: 3vh;
+        font-size: 4vh;
+        margin-left: 28vw;
+      }
     }
   </style>
 </head>
