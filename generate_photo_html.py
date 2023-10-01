@@ -29,7 +29,6 @@ def pageHtml(images, baseUrl, dimensionName, dpiName):
 </head>
 
 <body>
-
 {imagesHtml}
 
 </body>
