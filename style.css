@@ -25,7 +25,7 @@ img {
 
 a {
   display: block;
-  margin: 12px 6px;
+  margin: 16px 6px;
   color: black;
   text-decoration: none;
   background: white;
@@ -44,21 +44,21 @@ h1 {
 
 @media (orientation: landscape) and (width <= 2000px) {
   body {
-    columns: 3;
+    columns: 2;
     padding: 4vh 3vw;
   }
 }
 
 @media (orientation: portrait) {
   body {
-    columns: 2;
+    columns: 1;
     padding: 3vh 6vw;
   }
 }
 
 @media (orientation: landscape) and (width > 2000px) {
   body {
-    columns: 4;
+    columns: 3;
     padding: 3vh 6vw;
   }
 }
