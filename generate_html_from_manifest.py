@@ -47,6 +47,7 @@ def generate_one_page(title, images_names, manifest, page_name, baseUrl):
 
 
 if __name__ == "__main__":
+    most_recent_year, most_recent_month = ["2024", "janeiro"]
     manifests = [f for f in os.listdir(f".\\public") if f.endswith(".manifest")]
     manifest = "2024_janeiro.manifest"
     year, month = manifest.replace(".manifest", "").split("_")
@@ -58,8 +59,9 @@ if __name__ == "__main__":
             images_names = list(f.readlines())
         generate_one_page(f"{month} {year}", images_names, manifest, f"{year}_{month}_local", baseUrlLocal)
         generate_one_page(f"{month} {year}", images_names, manifest, f"{year}_{month}", baseUrl)
-        generate_one_page(title, images_names, manifest, "new_index", baseUrlLocal)
-        generate_one_page(title, images_names, manifest, "new_index", baseUrl)
+        if year == most_recent_year and month == most_recent_month:
+            generate_one_page(title, images_names, manifest, "new_index_local", baseUrlLocal)
+            generate_one_page(title, images_names, manifest, "new_index", baseUrl)
 """
     with open(f".\\public\\{manifest}", "r") as f:
         images_names = list(f.readlines())
