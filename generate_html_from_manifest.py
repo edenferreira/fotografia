@@ -1,0 +1,75 @@
+import os
+
+baseUrl = "https://edenferreira.github.io/fotografia/public"
+baseUrlLocal = "./public"
+
+def imageHtml(image_name, baseUrl):
+    fhd_name = image_name.replace("RES", "FHD")
+    fourK_name = image_name.replace("RES", "4K")
+    return f"""
+  <figure>
+    <a href="{baseUrl}/{fourK_name}">
+      <img src="{baseUrl}/{fhd_name}"></img>
+    </a>
+  </figure>"""
+
+def pageHtml(title, images_names, baseUrl):
+    imagesHtml = "\n".join([imageHtml(image_name, baseUrl) for image_name in images_names])
+    return f"""<html>
+
+<head>
+  <title>{title}</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://edenferreira.github.io/fotografia/normalize.css">
+  <link rel="stylesheet" href="https://edenferreira.github.io/fotografia/styles.css">
+</head>
+
+<body>
+{imagesHtml}
+
+</body>
+
+</html>
+"""
+
+def year_month_from_manifest(manifest):
+    year, month = manifest.replace(".manifest", "").split("_")
+    return [year, month]
+
+def generate_one_page(title, images_names, manifest, page_name, baseUrl):
+    year, month = year_month_from_manifest(manifest)
+    new_index = pageHtml(title, images_names, f"{baseUrl}/{year}/{month}")
+    with open(f"{page_name}.html", "w") as f:
+        f.write(new_index)
+
+
+if __name__ == "__main__":
+    manifests = [f for f in os.listdir(f".\\public") if f.endswith(".manifest")]
+    manifest = "2024_janeiro.manifest"
+    year, month = manifest.replace(".manifest", "").split("_")
+    title = "Eden Ferreira Fotografia"
+    for manifest in manifests:
+        images_names = None
+        year, month = year_month_from_manifest(manifest)
+        with open(f".\\public\\{manifest}", "r") as f:
+            images_names = list(f.readlines())
+        generate_one_page(f"{month} {year}", images_names, manifest, f"{year}_{month}_local", baseUrlLocal)
+        generate_one_page(f"{month} {year}", images_names, manifest, f"{year}_{month}", baseUrl)
+        generate_one_page(title, images_names, manifest, "new_index", baseUrlLocal)
+        generate_one_page(title, images_names, manifest, "new_index", baseUrl)
+"""
+    with open(f".\\public\\{manifest}", "r") as f:
+        images_names = list(f.readlines())
+        
+    new_index = pageHtml(title, images_names, f"{baseUrl}/{year}/{month}")
+    print(new_index)
+    with open("new_index.html", "w") as f:
+        f.write(new_index)
+
+    new_index_local = pageHtml(title, images_names, f"{baseUrlLocal}/{year}/{month}")
+    with open("new_index_local.html", "w") as f:
+        f.write(new_index_local)
+"""
