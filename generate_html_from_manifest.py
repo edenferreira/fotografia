@@ -88,7 +88,7 @@ def generate_one_page_with_name(title, images_names, manifest, page_name, baseUr
 
 
 if __name__ == "__main__":
-    most_recent_year, most_recent_month = ["2024", "janeiro"]
+    most_recent_year, most_recent_month = ["2024", "marco"]
     manifests = [f for f in os.listdir(f".\\public") if f.endswith(".manifest")]
     manifest = "2024_janeiro.manifest"
     year, month = manifest.replace(".manifest", "").split("_")

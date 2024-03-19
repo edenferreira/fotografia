@@ -11,11 +11,17 @@ def all_file_names(year, month):
 
 if __name__ == "__main__":
     try:
+        with open(".\\public\\2024_marco.manifest", "x") as f:
+            f.write('\n'.join(all_file_names(2024, "marco")))
+    except FileExistsError:
+        pass
+
+    try:
         with open(".\\public\\2024_janeiro.manifest", "x") as f:
             f.write('\n'.join(all_file_names(2024, "janeiro")))
     except FileExistsError:
         pass
-    
+
     try:
         with open(".\\public\\2023_setembro.manifest", "x") as f:
             f.write('\n'.join(all_file_names(2023, "setembro")))
